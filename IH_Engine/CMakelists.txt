@@ -1,0 +1,14 @@
+project(IH_Engine)
+
+file(GLOB_RECURSE ENGINE_SOURCES "src/*.cpp" "src/*.h")
+
+add_library(IH_Engine SHARED ${ENGINE_SOURCES})
+
+target_include_directories(IH_Engine PUBLIC 
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+    $<INSTALL_INTERFACE:include>
+)
+
+set_target_properties(IH_Engine PROPERTIES
+    INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)

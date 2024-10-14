@@ -9,6 +9,5 @@ target_include_directories(IH_Engine PUBLIC
     $<INSTALL_INTERFACE:include>
 )
 
-set_target_properties(IH_Engine PROPERTIES
-    INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/src"
-)
+add_subdirectory(third_party/SDL EXCLUDE_FROM_ALL)
+target_link_libraries(IH_Engine PRIVATE SDL3::SDL3)

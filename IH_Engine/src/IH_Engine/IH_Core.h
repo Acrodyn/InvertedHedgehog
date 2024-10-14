@@ -7,8 +7,3 @@
 #else
     #define IH_ENGINE_API
 #endif
-
-int GetBla()
-{
-    return 3;
-}

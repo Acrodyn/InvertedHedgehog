@@ -20,4 +20,22 @@ add_subdirectory(third_party/GLM EXCLUDE_FROM_ALL)
 target_link_libraries(IH_Engine PRIVATE glm::glm)
 set_target_properties(glm PROPERTIES FOLDER "ExternalLibs")
 
-#set_property(TARGET SDL3-shared PROPERTY USE_FOLDERS "ThirdParty"))
+add_subdirectory(third_party/fmt EXCLUDE_FROM_ALL)
+target_link_libraries(IH_Engine PRIVATE fmt::fmt)
+set_target_properties(fmt PROPERTIES FOLDER "ExternalLibs")
+
+add_subdirectory(third_party/fastgltf EXCLUDE_FROM_ALL)
+target_link_libraries(IH_Engine PRIVATE fastgltf::fastgltf)
+set_target_properties(fastgltf PROPERTIES FOLDER "ExternalLibs")
+
+file(GLOB_RECURSE STB_HEADERS third_party/stb/*.h)
+file(GLOB_RECURSE STB_SOURCES third_party/stb/*.cpp)
+add_library(stb STATIC ${STB_HEADERS} ${STB_SOURCES})
+target_include_directories(stb PRIVATE third_party/stb)
+set_target_properties(stb PROPERTIES FOLDER "ExternalLibs")
+
+file(GLOB_RECURSE IMGUI_HEADERS third_party/imGui/*.h)
+file(GLOB_RECURSE IMGUI_SOURCES third_party/imGui/*.cpp)
+add_library(imGui STATIC ${IMGUI_HEADERS} ${IMGUI_SOURCES})
+target_include_directories(imGui PRIVATE third_party/imGui)
+set_target_properties(imGui PROPERTIES FOLDER "ExternalLibs")

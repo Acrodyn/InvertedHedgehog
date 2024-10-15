@@ -4,3 +4,15 @@
 [submodule "IH_Engine/third_party/GLM"]
 	path = IH_Engine/third_party/GLM
 	url = https://github.com/g-truc/glm
+[submodule "IH_Engine/third_party/fmt"]
+	path = IH_Engine/third_party/fmt
+	url = https://github.com/fmtlib/fmt
+[submodule "IH_Engine/third_party/stb"]
+	path = IH_Engine/third_party/stb
+	url = https://github.com/nothings/stb.git
+[submodule "IH_Engine/third_party/imGui"]
+	path = IH_Engine/third_party/imGui
+	url = https://github.com/ocornut/imgui.git
+[submodule "IH_Engine/third_party/fastgltf"]
+	path = IH_Engine/third_party/fastgltf
+	url = https://github.com/spnda/fastgltf.git

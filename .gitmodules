@@ -1,3 +1,6 @@
 [submodule "IH_Engine/third_party/SDL"]
 	path = IH_Engine/third_party/SDL
 	url = https://github.com/libsdl-org/SDL.git
+[submodule "IH_Engine/third_party/GLM"]
+	path = IH_Engine/third_party/GLM
+	url = https://github.com/g-truc/glm

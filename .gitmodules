@@ -1,9 +1,6 @@
 [submodule "IH_Engine/third_party/SDL"]
 	path = IH_Engine/third_party/SDL
 	url = https://github.com/libsdl-org/SDL.git
-[submodule "IH_Engine/third_party/GLM"]
-	path = IH_Engine/third_party/GLM
-	url = https://github.com/g-truc/glm
 [submodule "IH_Engine/third_party/fmt"]
 	path = IH_Engine/third_party/fmt
 	url = https://github.com/fmtlib/fmt
@@ -16,3 +13,12 @@
 [submodule "IH_Engine/third_party/fastgltf"]
 	path = IH_Engine/third_party/fastgltf
 	url = https://github.com/spnda/fastgltf.git
+[submodule "IH_Engine/IH_Vulkan/third_party/vkbootstrap"]
+	path = IH_Engine/IH_Vulkan/third_party/vkbootstrap
+	url = https://github.com/charles-lunarg/vk-bootstrap
+[submodule "IH_Engine/IH_Vulkan/third_party/vma"]
+	path = IH_Engine/IH_Vulkan/third_party/vma
+	url = https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator
+[submodule "IH_Engine/IH_Vulkan/third_party/volk"]
+	path = IH_Engine/IH_Vulkan/third_party/volk
+	url = https://github.com/zeux/volk

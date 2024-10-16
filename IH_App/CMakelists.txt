@@ -4,7 +4,7 @@ file(GLOB_RECURSE APP_SOURCES "src/*.cpp" "src/*.h")
 
 add_executable(IH_App ${APP_SOURCES})
 
-target_link_libraries(IH_App PRIVATE IH_Engine)
+target_link_libraries(IH_App IH_Engine)
 
 target_include_directories(IH_App PRIVATE
     $<TARGET_PROPERTY:IH_Engine,INTERFACE_INCLUDE_DIRECTORIES>

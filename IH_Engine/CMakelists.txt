@@ -11,14 +11,15 @@ target_include_directories(IH_Engine PUBLIC
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
+add_subdirectory(IH_Vulkan)
+
 add_subdirectory(third_party/SDL EXCLUDE_FROM_ALL)
 target_link_libraries(IH_Engine PRIVATE SDL3::SDL3)
 set_target_properties(SDL3-shared PROPERTIES FOLDER "ExternalLibs")
 set_target_properties(SDL_uclibc PROPERTIES FOLDER "ExternalLibs")
 
-add_subdirectory(third_party/GLM EXCLUDE_FROM_ALL)
-target_link_libraries(IH_Engine PRIVATE glm::glm)
-set_target_properties(glm PROPERTIES FOLDER "ExternalLibs")
+add_subdirectory(third_party/glm EXCLUDE_FROM_ALL)
+target_link_libraries(IH_Engine PRIVATE glm::glm-header-only)
 
 add_subdirectory(third_party/fmt EXCLUDE_FROM_ALL)
 target_link_libraries(IH_Engine PRIVATE fmt::fmt)

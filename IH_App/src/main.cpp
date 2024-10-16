@@ -4,5 +4,6 @@
 int main()
 {
 	std::cout << "Test" << std::endl;
+	TestFunction();
 	return 0;
 }

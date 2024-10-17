@@ -9,5 +9,3 @@
 #else
     #define IH_ENGINE_API
 #endif
-
-IH_ENGINE_API void TestFunction();

@@ -1,9 +1,11 @@
-#include "iostream"
-#include "IH_Engine/IH_Core.h"
+#include "Core/SampleGame.h"
 
 int main()
 {
-	std::cout << "Test" << std::endl;
-	TestFunction();
-	return 0;
+	SampleGame Game;
+
+	Game.SetAppName("Sample Game");
+	Game.SetAppRenderer(AppRenderer::Vulkan);
+
+	Game.Run();
 }

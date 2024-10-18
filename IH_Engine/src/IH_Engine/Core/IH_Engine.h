@@ -4,12 +4,18 @@ class IH_Application;
 
 class IH_Engine
 {
-public:
+private:
     IH_Engine();
 
-    static const IH_Engine* Get();
+public:
+    static IH_Engine* Get();
 
-    void StartEngine(IH_Application* NewApplication);
+    void InjectApp(IH_Application* NewApplication);
+
+private:
+    void StartEngine();
+    void ResetEngine();
+    void ShutdownEngine();
 
 private:
     static IH_Engine* EngineInstance;

@@ -13,7 +13,7 @@ public:
 public:
     void Run();
     void SetAppRenderer(AppRenderer Renderer);
-    void SetAppName(const std::string& Name);
+    void SetAppName(char* Name);
 
 protected:
     virtual void Init();
@@ -21,7 +21,7 @@ protected:
     virtual void End();
 
 private:
-    std::string AppName;
+   char* AppName;
 
 friend class IH_Engine;
 };

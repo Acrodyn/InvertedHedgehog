@@ -1,7 +1,7 @@
 #include "IH_Application.h"
 #include "IH_Engine.h"
 
-IH_Application::IH_Application()
+IH_Application::IH_Application() : AppName(nullptr)
 {
 }
 
@@ -11,8 +11,7 @@ IH_Application::~IH_Application()
 
 void IH_Application::Run()
 {
-	IH_Engine Engine;
-	Engine.StartEngine(this);
+	IH_Engine::Get()->InjectApp(this);
 }
 
 void IH_Application::SetAppRenderer(AppRenderer Renderer)
@@ -20,7 +19,7 @@ void IH_Application::SetAppRenderer(AppRenderer Renderer)
 
 }
 
-void IH_Application::SetAppName(const std::string& Name)
+void IH_Application::SetAppName(char* Name)
 {
 	AppName = Name;
 }

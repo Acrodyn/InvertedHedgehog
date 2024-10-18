@@ -1,5 +1,3 @@
-project(IH_App)
-
 file(GLOB_RECURSE APP_SOURCES "src/**/*.cpp" "src/**/*.h" "src/*.cpp" "src/*.h")
 
 add_executable(IH_App ${APP_SOURCES})

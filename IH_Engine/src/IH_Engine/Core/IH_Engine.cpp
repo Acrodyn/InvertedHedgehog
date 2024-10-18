@@ -1,21 +1,17 @@
 #include "IH_Engine.h"
 #include "IH_Application.h"
-
-IH_Engine* IH_Engine::EngineInstance = nullptr;
+#include "Utils/IH_Logger.h"
 
 IH_Engine* IH_Engine::Get() 
 {
-	if (!EngineInstance)
-	{
-		EngineInstance = new IH_Engine();
-	}
+	IH_Engine* EngineInstance = new IH_Engine();
 
 	return EngineInstance; 
 }
 
 IH_Engine::IH_Engine() : Application(nullptr)
 {
-
+	LoggerModule = new IH_Logger();
 }
 
 void IH_Engine::InjectApp(IH_Application* NewApplication)

@@ -1,0 +1,4 @@
+file(GLOB_RECURSE SUB_SOURCES "*.cpp" "*.h")
+
+target_include_directories(IH_Engine PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
+target_include_directories(IH_Engine PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../")

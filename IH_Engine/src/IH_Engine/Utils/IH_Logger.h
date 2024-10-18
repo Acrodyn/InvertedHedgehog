@@ -11,13 +11,18 @@ public:
 	IH_Logger() {};
 
     template<typename... Args>
-    void Log(std::string LogText, Args... args) const
+    std::string Format(std::string LogText, Args... args) const
     {
         int index = 0;
-
         (([&] { LogText = ParseLog(LogText, args, index++); }()), ...);
 
-        std::cout << LogText << std::endl;
+        return LogText;
+    }
+
+    template<typename... Args>
+    void Log(std::string LogText, Args... args) const
+    {
+       std::cout << Format(LogText, args...);
     }
     
 private:

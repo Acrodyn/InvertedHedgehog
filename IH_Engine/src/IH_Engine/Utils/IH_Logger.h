@@ -1,15 +1,14 @@
 #pragma once
 
 #include "IH_Core.h"
+#include "IH_Module.h"
 
 #include <string>
 #include <iostream>
 
-class IH_ENGINE_API IH_Logger
+class IH_ENGINE_API IH_Logger : public IH_Module
 {
 public:
-	IH_Logger() {};
-
     template<typename... Args>
     std::string Format(std::string LogText, Args... args) const
     {

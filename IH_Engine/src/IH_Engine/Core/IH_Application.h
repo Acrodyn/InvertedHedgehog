@@ -18,6 +18,7 @@ public:
 protected:
     virtual void Init();
     virtual void Update();
+    virtual void Reset();
     virtual void End();
 
 private:

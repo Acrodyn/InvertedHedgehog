@@ -34,6 +34,11 @@ void IH_Application::Update()
 
 }
 
+void IH_Application::Reset()
+{
+
+}
+
 void IH_Application::End()
 {
 

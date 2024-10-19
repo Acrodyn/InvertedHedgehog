@@ -13,8 +13,7 @@ public:
     template<typename... Args>
     std::string Format(std::string LogText, Args... args) const
     {
-        int index = 0;
-        (([&] { LogText = ParseLog(LogText, args, index++); }()), ...);
+        (([&] { LogText = ParseLog(LogText, args); }()), ...);
 
         return LogText;
     }
@@ -26,5 +25,5 @@ public:
     }
     
 private:
-    std::string ParseLog(const std::string& Entry, const std::string& Value, int Index) const;
+    std::string ParseLog(const std::string& Entry, const std::string& Value) const;
 };

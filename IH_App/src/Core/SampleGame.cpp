@@ -13,7 +13,7 @@ void SampleGame::Update()
 {
 	IH_Application::Update();
 
-	IH_Engine::GetLogger()->Log(CTXT("Test (0) + (1)"), CTXT("Char"), DTXT(123));
+	IH_Engine::GetLogger()->Log(CTXT("Test (x) + (x)"), CTXT("Char"), DTXT(155));
 }
 
 void SampleGame::End()

@@ -5,6 +5,9 @@ add_library(IH_Engine SHARED ${ENGINE_SOURCES})
 target_compile_definitions(IH_Engine PRIVATE IH_ENGINE_EXPORTS)
 target_include_directories(IH_Engine PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+set_target_properties(IH_Engine PROPERTIES
+    WINDOWS_EXPORT_ALL_SYMBOLS ON
+)
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/src")
 

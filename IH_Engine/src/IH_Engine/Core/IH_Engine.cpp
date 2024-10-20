@@ -10,7 +10,7 @@ IH_Engine* IH_Engine::Get()
 	return EngineInstance; 
 }
 
-IH_Engine::IH_Engine() : Application(nullptr)
+IH_Engine::IH_Engine() : _application(nullptr)
 {
 	// modules
 	REGISTER_MODULE(IH_Logger, Logger);
@@ -19,25 +19,31 @@ IH_Engine::IH_Engine() : Application(nullptr)
 
 void IH_Engine::InjectApp(IH_Application* NewApplication)
 {
-	if (Application)
+	if (_application)
 	{
-		Application->End();
-		Application = nullptr;
+		_application->End();
+		_application = nullptr;
 	}
 
-	Application = NewApplication;
+	_application = NewApplication;
 	Start();
+}
+
+const AppData* IH_Engine::GetAppData()
+{
+	IH_PTR_CHECK_RETURN(_application, nullptr);
+	return &_application->_appData;
 }
 
 void IH_Engine::Init()
 {
-	IH_PTR_CHECK_VOID(Application);
-	Application->Init();
+	IH_PTR_CHECK_VOID(_application);
+	_application->Init();
 }
 
 void IH_Engine::Start()
 {
-	IH_PTR_CHECK_VOID(Application);
+	IH_PTR_CHECK_VOID(_application);
 
 	Init();
 	Loop();
@@ -46,34 +52,34 @@ void IH_Engine::Start()
 
 void IH_Engine::Loop()
 {
-	Application->Update();
+	_application->Update();
 }
 
 void IH_Engine::Reset()
 {
-	if (Application)
+	if (_application)
 	{
-		Application->Reset();
+		_application->Reset();
 	}
 }
 
 void IH_Engine::Shutdown()
 {
-	if (Application)
+	if (_application)
 	{
-		Application->End();
+		_application->End();
 	}
 
-	for (IH_Module* Module : Modules)
+	for (IH_Module* Module : _modules)
 	{
 		Module->Clear();
 		delete Module;
 	}
 
-	Modules.clear();
+	_modules.clear();
 }
 
 void IH_Engine::RegisterModule(IH_Module* Module)
 {
-	Modules.push_back(Module);
+	_modules.push_back(Module);
 }

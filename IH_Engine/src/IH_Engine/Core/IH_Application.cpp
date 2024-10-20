@@ -1,7 +1,7 @@
 #include "IH_Application.h"
 #include "IH_Engine.h"
 
-IH_Application::IH_Application() : AppName(nullptr)
+IH_Application::IH_Application()
 {
 }
 
@@ -16,12 +16,12 @@ void IH_Application::Run()
 
 void IH_Application::SetAppRenderer(AppRenderer Renderer)
 {
-
+	_appData.Renderer = Renderer;
 }
 
 void IH_Application::SetAppName(char* Name)
 {
-	AppName = Name;
+	_appData.AppName = Name;
 }
 
 void IH_Application::Init()

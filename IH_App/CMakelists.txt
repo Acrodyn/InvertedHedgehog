@@ -7,5 +7,7 @@ target_link_libraries(IH_App IH_Engine)
 target_include_directories(IH_App PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}")
 
 add_custom_command(TARGET IH_App POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-    $<TARGET_FILE:IH_Engine> $<TARGET_FILE_DIR:IH_App>)
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    $<TARGET_FILE_DIR:IH_Engine> $<TARGET_FILE_DIR:IH_App>
+    COMMENT "Copying all DLLs from IH_Engine to IH_App")
+

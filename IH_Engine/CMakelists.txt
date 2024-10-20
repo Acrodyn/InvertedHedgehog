@@ -18,7 +18,7 @@ add_subdirectory(libs/IH_Vulkan)
 target_link_libraries(IH_Engine PRIVATE IH_Vulkan)
 set_target_properties(IH_Vulkan PROPERTIES FOLDER "InternalLibs")
 
-add_subdirectory(third_party/SDL EXCLUDE_FROM_ALL)
+add_subdirectory(third_party/SDL)
 target_link_libraries(IH_Engine PRIVATE SDL3::SDL3)
 set_target_properties(SDL3-shared PROPERTIES FOLDER "ExternalLibs")
 set_target_properties(SDL_uclibc PROPERTIES FOLDER "ExternalLibs")
@@ -45,3 +45,8 @@ file(GLOB_RECURSE IMGUI_SOURCES third_party/imGui/*.cpp)
 add_library(imGui STATIC ${IMGUI_HEADERS} ${IMGUI_SOURCES})
 target_include_directories(imGui PRIVATE third_party/imGui)
 set_target_properties(imGui PROPERTIES FOLDER "ExternalLibs")
+
+add_custom_command(TARGET IH_Engine POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    $<TARGET_RUNTIME_DLLS:IH_Engine> $<TARGET_FILE_DIR:IH_Engine>
+    COMMAND_EXPAND_LISTS)

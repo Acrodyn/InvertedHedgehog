@@ -21,8 +21,8 @@ protected:
     virtual void Reset();
     virtual void End();
 
-private:
-   char* AppName;
+protected:
+    AppData _appData;
 
 friend class IH_Engine;
 };

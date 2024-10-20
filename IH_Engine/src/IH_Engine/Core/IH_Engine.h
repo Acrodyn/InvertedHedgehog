@@ -6,6 +6,7 @@
 
 #define IHE IH_Engine
 
+struct AppData;
 class IH_Module;
 class IH_Application;
 
@@ -18,6 +19,7 @@ public:
     static IH_Engine* Get();
 
     void InjectApp(IH_Application* NewApplication);
+    const AppData* GetAppData();
 
     IH_MODULE(class IH_Logger, Logger);
     IH_MODULE(class IH_Graphics, Graphics);
@@ -32,7 +34,7 @@ private:
     void RegisterModule(IH_Module* Module);
 
 private:
-    IH_Application* Application;
+    IH_Application* _application;
 
-    std::vector<IH_Module*> Modules;
+    std::vector<IH_Module*> _modules;
 };

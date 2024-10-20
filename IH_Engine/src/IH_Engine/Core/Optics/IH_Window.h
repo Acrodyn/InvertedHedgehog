@@ -1,9 +1,6 @@
 #pragma once
 
-//#include "vk_types.h"
-
-#include "IH_Vulkan/vk_engine.h"
-#include "IH_Vulkan/vk_types.h"
+struct SDL_Window;
 
 class IH_Window
 {
@@ -12,5 +9,8 @@ public:
 
 	void Init();
 	void Destroy();
+
+private:
+	SDL_Window* Window = nullptr;
 
 };

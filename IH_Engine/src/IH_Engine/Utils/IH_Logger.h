@@ -6,7 +6,7 @@
 #include <string>
 #include <iostream>
 
-class IH_ENGINE_API IH_Logger : public IH_Module
+class IH_Logger : public IH_Module
 {
 public:
     template<typename... Args>
@@ -17,8 +17,8 @@ public:
         return LogText;
     }
 
-    template<typename... Args>
-    void Log(std::string LogText, Args... args) const
+   template<typename... Args>
+   void Log(std::string LogText, Args... args) const
     {
        std::cout << Format(LogText, args...);
     }

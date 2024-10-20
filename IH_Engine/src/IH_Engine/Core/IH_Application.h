@@ -4,16 +4,16 @@
 #include "IH_Core.h"
 #include "IH_AppData.h"
 
-class IH_ENGINE_API IH_Application
+class IH_Application
 {
 public:
     IH_Application();
     ~IH_Application();
 
 public:
-    void Run();
-    void SetAppRenderer(AppRenderer Renderer);
-    void SetAppName(char* Name);
+    void IH_API Run();
+    void IH_API SetAppRenderer(AppRenderer Renderer);
+    void IH_API SetAppName(char* Name);
 
 protected:
     virtual void Init();

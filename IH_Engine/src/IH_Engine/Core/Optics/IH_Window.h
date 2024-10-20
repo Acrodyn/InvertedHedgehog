@@ -1,5 +1,7 @@
 #pragma once
 
+#include "IH_Core.h"
+
 struct SDL_Window;
 
 class IH_Window

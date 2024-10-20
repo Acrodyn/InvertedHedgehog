@@ -1,7 +1,7 @@
 #include "IH_Application.h"
 #include "IH_Engine.h"
 
-IH_Application::IH_Application()
+IH_Application::IH_Application() : _appData()
 {
 }
 
@@ -11,7 +11,7 @@ IH_Application::~IH_Application()
 
 void IH_Application::Run()
 {
-	IH_Engine::Get()->InjectApp(this);
+	IHE_PTR->InjectApp(this);
 }
 
 void IH_Application::SetAppRenderer(AppRenderer Renderer)

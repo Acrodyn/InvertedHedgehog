@@ -2,7 +2,7 @@
 
 #include "IH_Core.h"
 
-class IH_ENGINE_API IH_Module
+class IH_Module
 {
 public:
 	virtual void Init() {};

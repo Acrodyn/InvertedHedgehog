@@ -2,10 +2,10 @@
 
 #ifdef _WIN32
     #ifdef IH_ENGINE_EXPORTS
-        #define IH_ENGINE_API __declspec(dllexport)
+        #define IH_API __declspec(dllexport)
     #else
-        #define IH_ENGINE_API __declspec(dllimport)
+        #define IH_API __declspec(dllimport)
     #endif
 #else
-    #define IH_ENGINE_API
+    #define IH_API
 #endif

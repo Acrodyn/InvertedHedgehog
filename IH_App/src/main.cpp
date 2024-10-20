@@ -6,6 +6,7 @@ int main()
 
 	Game.SetAppName("Sample Game");
 	Game.SetAppRenderer(AppRenderer::Vulkan);
+	Game.SetWindowDimensions(900, 600);
 
 	Game.Run();
 }

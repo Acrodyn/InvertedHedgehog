@@ -14,6 +14,7 @@ public:
     void IH_API Run();
     void IH_API SetAppRenderer(AppRenderer Renderer);
     void IH_API SetAppName(char* Name);
+    void IH_API SetWindowDimensions(int Width, int Height);
 
 protected:
     virtual void Init();

@@ -32,6 +32,8 @@ private:
     void Reset();
     void Shutdown();
 
+    bool ShouldLoop();
+
     void RegisterModule(IH_Module* Module);
 
 private:

@@ -2,8 +2,8 @@
 
 #define IH_MODULE(Type, Name) \
 private: Type* Name##Module;\
-private: IH_API const Type* Get##Name##Module() { return Name##Module; }; \
-public: IH_API static const Type* Get##Name() { return IH_Engine::Get()->Get##Name##Module(); };
+private: IH_API Type* Get##Name##Module() { return Name##Module; }; \
+public: IH_API static Type* Get##Name() { return IH_Engine::Get()->Get##Name##Module(); };
 
 #define REGISTER_MODULE(Type, Name) \
 Name##Module = new Type(); \

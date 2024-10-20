@@ -12,30 +12,6 @@
 //
 //IH_Vulkan* VulkanInstance = nullptr;
 //
-//IH_Vulkan& IH_Vulkan::Get() { return *VulkanInstance; }
-//void IH_Vulkan::init()
-//{
-//    // only one engine initialization is allowed with the application.
-//    //assert(VulkanInstance == nullptr);
-//    //VulkanInstance = this;
-//
-//    //// We initialize SDL and create a window with it.
-//    //SDL_Init(SDL_INIT_VIDEO);
-//
-//    //SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_VULKAN);
-//
-//    //_window = SDL_CreateWindow(
-//    //    "Vulkan Engine",
-//    //    SDL_WINDOWPOS_UNDEFINED,
-//    //    SDL_WINDOWPOS_UNDEFINED,
-//    //    _windowExtent.width,
-//    //    _windowExtent.height,
-//    //    window_flags);
-//
-//    //// everything went fine
-//    //_isInitialized = true;
-//}
-//
 //void IH_Vulkan::cleanup()
 //{
 //    if (_isInitialized) {

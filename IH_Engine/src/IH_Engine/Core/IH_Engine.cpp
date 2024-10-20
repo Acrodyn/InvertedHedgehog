@@ -5,7 +5,7 @@
 
 IH_Engine* IH_Engine::Get() 
 {
-	IH_Engine* EngineInstance = new IH_Engine();
+	static IH_Engine* EngineInstance = new IH_Engine();
 
 	return EngineInstance; 
 }
@@ -39,6 +39,11 @@ void IH_Engine::Init()
 {
 	IH_PTR_CHECK_VOID(_application);
 	_application->Init();
+
+	for (IH_Module* Module : _modules)
+	{
+		Module->Init(GetAppData());
+	}
 }
 
 void IH_Engine::Start()
@@ -52,7 +57,11 @@ void IH_Engine::Start()
 
 void IH_Engine::Loop()
 {
-	_application->Update();
+	while (ShouldLoop())
+	{
+		_application->Update();
+		GraphicsModule->Render();
+	}
 }
 
 void IH_Engine::Reset()
@@ -77,6 +86,11 @@ void IH_Engine::Shutdown()
 	}
 
 	_modules.clear();
+}
+
+bool IH_Engine::ShouldLoop()
+{
+	return GraphicsModule->CanUpdate();
 }
 
 void IH_Engine::RegisterModule(IH_Module* Module)

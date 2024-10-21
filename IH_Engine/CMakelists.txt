@@ -27,23 +27,23 @@ add_subdirectory(third_party/glm EXCLUDE_FROM_ALL)
 target_link_libraries(IH_Engine PRIVATE glm::glm-header-only)
 
 add_subdirectory(third_party/fmt EXCLUDE_FROM_ALL)
-target_link_libraries(IH_Engine PRIVATE fmt::fmt)
+target_link_libraries(IH_Engine INTERFACE fmt::fmt)
 set_target_properties(fmt PROPERTIES FOLDER "ExternalLibs")
 
 add_subdirectory(third_party/fastgltf EXCLUDE_FROM_ALL)
-target_link_libraries(IH_Engine PRIVATE fastgltf::fastgltf)
+target_link_libraries(IH_Engine INTERFACE fastgltf::fastgltf)
 set_target_properties(fastgltf PROPERTIES FOLDER "ExternalLibs")
 
 file(GLOB_RECURSE STB_HEADERS third_party/stb/*.h)
 file(GLOB_RECURSE STB_SOURCES third_party/stb/*.cpp)
 add_library(stb STATIC ${STB_HEADERS} ${STB_SOURCES})
-target_include_directories(stb PRIVATE third_party/stb)
+target_include_directories(stb INTERFACE third_party/stb)
 set_target_properties(stb PROPERTIES FOLDER "ExternalLibs")
 
 file(GLOB_RECURSE IMGUI_HEADERS third_party/imGui/*.h)
 file(GLOB_RECURSE IMGUI_SOURCES third_party/imGui/*.cpp)
 add_library(imGui STATIC ${IMGUI_HEADERS} ${IMGUI_SOURCES})
-target_include_directories(imGui PRIVATE third_party/imGui)
+target_include_directories(imGui INTERFACE third_party/imGui)
 set_target_properties(imGui PROPERTIES FOLDER "ExternalLibs")
 
 add_custom_command(TARGET IH_Engine POST_BUILD

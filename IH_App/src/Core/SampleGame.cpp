@@ -2,8 +2,6 @@
 #include "Core/IH_Engine.h"
 #include "Utils/IH_Logger.h"
 
-#include <iostream>
-
 void SampleGame::Init()
 {
 	IH_Application::Init();

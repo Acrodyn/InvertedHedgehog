@@ -27,7 +27,7 @@ add_subdirectory(third_party/glm EXCLUDE_FROM_ALL)
 target_link_libraries(IH_Engine PRIVATE glm::glm-header-only)
 
 add_subdirectory(third_party/fmt EXCLUDE_FROM_ALL)
-target_link_libraries(IH_Engine INTERFACE fmt::fmt)
+target_link_libraries(IH_Engine PUBLIC fmt::fmt)
 set_target_properties(fmt PROPERTIES FOLDER "ExternalLibs")
 
 add_subdirectory(third_party/fastgltf EXCLUDE_FROM_ALL)

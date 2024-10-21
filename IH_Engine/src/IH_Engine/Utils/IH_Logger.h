@@ -4,7 +4,7 @@
 #include "IH_Module.h"
 
 #include <string>
-#include <iostream>
+#include <fmt/core.h>
 
 class IH_Logger : public IH_Module
 {
@@ -20,7 +20,7 @@ public:
    template<typename... Args>
    void Log(std::string LogText, Args... args) const
     {
-       std::cout << Format(LogText, args...);
+       fmt::println(Format(LogText, args...));
     }
     
 private:

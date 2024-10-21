@@ -6,10 +6,10 @@
 class IH_Window;
 enum class AppRenderer;
 
-class IH_Graphics : public IH_Module
+class IH_Optics : public IH_Module
 {
 public:
-	IH_Graphics();
+	IH_Optics();
 
 	void Init(const AppData* AppData) override;
 	void Clear() override;

@@ -23,7 +23,7 @@ public:
     IH_API const AppData* GetAppData();
 
     IH_MODULE(class IH_Logger, Logger);
-    IH_MODULE(class IH_Graphics, Graphics);
+    IH_MODULE(class IH_Optics, Optics);
 
 private:
     void Init();

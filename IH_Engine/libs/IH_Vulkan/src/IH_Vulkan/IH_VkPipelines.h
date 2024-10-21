@@ -1,5 +1,5 @@
 ﻿#pragma once 
-#include "vk_types.h"
+#include "IH_VkTypes.h"
 
 namespace vkutil {
 

@@ -14,7 +14,7 @@ IH_Engine::IH_Engine() : _application(nullptr)
 {
 	// modules
 	REGISTER_MODULE(IH_Logger, Logger);
-	REGISTER_MODULE(IH_Graphics, Graphics);
+	REGISTER_MODULE(IH_Optics, Optics);
 }
 
 void IH_Engine::InjectApp(IH_Application* NewApplication)
@@ -60,7 +60,7 @@ void IH_Engine::Loop()
 	while (ShouldLoop())
 	{
 		_application->Update();
-		GraphicsModule->Render();
+		OpticsModule->Render();
 	}
 }
 
@@ -90,7 +90,7 @@ void IH_Engine::Shutdown()
 
 bool IH_Engine::ShouldLoop()
 {
-	return GraphicsModule->CanUpdate();
+	return OpticsModule->CanUpdate();
 }
 
 void IH_Engine::RegisterModule(IH_Module* Module)

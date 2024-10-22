@@ -6,13 +6,14 @@
 #include "SDL3/SDL_events.h"
 
 struct SDL_Window;
+class IH_Vulkan;
 
 class IH_Window
 {
 public:
 	IH_Window();
 
-	void Init(char* Name, int Width, int Height, AppRenderer Renderer);
+	void Init(char* Name, int Width, int Height, AppRenderer RendererType);
 	void Update();
 	void Destroy();
 
@@ -21,9 +22,10 @@ public:
 	bool IsWindowMaximzed();
 
 private:
-	Uint64 GetAppropriateWindowFlags(AppRenderer Renderer);
+	Uint64 GetAppropriateWindowFlags(AppRenderer RendererType);
 
 private:
+	IH_Vulkan* _renderer = nullptr;
 	SDL_Window* _window = nullptr;
 	SDL_Event _event;
 };

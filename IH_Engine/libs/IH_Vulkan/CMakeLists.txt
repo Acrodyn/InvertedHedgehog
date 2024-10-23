@@ -48,6 +48,7 @@ message(STATUS "Vulkan Include Dirs: ${Vulkan_INCLUDE_DIRS}")
 message(STATUS "Vulkan Libraries: ${Vulkan_LIBRARIES}")
 
 target_link_libraries(IH_Vulkan PRIVATE fmt::fmt)
+target_link_libraries(IH_Vulkan PRIVATE SDL3::SDL3)
 
 target_include_directories(IH_Vulkan PRIVATE ${Vulkan_INCLUDE_DIRS})
 target_link_libraries(IH_Vulkan PUBLIC Vulkan::Vulkan)

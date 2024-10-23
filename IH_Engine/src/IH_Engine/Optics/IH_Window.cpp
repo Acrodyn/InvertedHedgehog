@@ -16,7 +16,8 @@ void IH_Window::Init(char* Name, int Width, int Height, AppRenderer RendererType
     _window = SDL_CreateWindow(Name, Width, Height, windowFlags);
 
     // TODO: Needs abstraction and flexibility
-    _renderer = new IH_Vulkan();
+    //_renderer = new IH_Vulkan();
+    //_renderer->Init(this);
 }
 
 void IH_Window::Update()

@@ -1,29 +1,28 @@
 #pragma once
 
 #include "IH_VkTypes.h"
+#include "IH_Engine/Optics/IH_RendererInterface.h"
 
-class IH_Vulkan 
+class IH_Window;
+
+class IH_Vulkan : public IH_RendererInterface
 {
 public:
+	void Init(IH_Window* Window) override;
+	AppRenderer GetRendererType() override;
 
-	//bool _isInitialized{ false };
-	//int _frameNumber{ 0 };
-	//bool stop_rendering{ false };
-	//VkExtent2D _windowExtent{ 1700 , 900 };
+private:
+	void InitVulkan();
+	void InitSwapchain();
+	void InitCommands();
+	void InitSyncStructures();
+	
+private:
+	VkInstance _instance;						// Vulkan library handle
+	VkDebugUtilsMessengerEXT _debug_messenger;	// Vulkan debug output handle
+	VkPhysicalDevice _chosenGPU;				// GPU chosen as the default device
+	VkDevice _device;							// Vulkan device for commands
+	VkSurfaceKHR _surface;						// Vulkan window surface
 
-	//struct SDL_Window* _window{ nullptr };
-
-	//static IH_Vulkan& Get();
-
-	////initializes everything in the engine
-	//void init();
-
-	////shuts down the engine
-	//void cleanup();
-
-	////draw loop
-	//void draw();
-
-	////run main loop
-	//void run();
+	IH_Window* _window;
 };

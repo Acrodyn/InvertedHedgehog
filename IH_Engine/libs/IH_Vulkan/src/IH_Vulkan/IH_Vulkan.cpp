@@ -1,6 +1,8 @@
 #include "IH_Vulkan.h"
 
+#include "IH_Engine/Core/IH_Engine.h"
 #include "IH_Engine/Optics/IH_Window.h"
+#include "IH_Engine/Core/IH_AppData.h"
 
 #include "IH_VKInitializers.h"
 #include "VkBootstrap.h"
@@ -18,7 +20,18 @@ void IH_Vulkan::Init(IH_Window* Window)
 	InitSyncStructures();
 }
 
-int64_t IH_Vulkan::GetWindowFlags()
+void IH_Vulkan::Clear()
+{
+	DestroySwapchain();
+
+	vkDestroySurfaceKHR(_instance, _surface, nullptr);
+	vkDestroyDevice(_device, nullptr);
+
+	vkb::destroy_debug_utils_messenger(_instance, _debug_messenger);
+	vkDestroyInstance(_instance, nullptr);
+}
+
+uint64_t IH_Vulkan::GetWindowFlags()
 {
 	return SDL_WINDOW_VULKAN;
 }
@@ -39,7 +52,6 @@ void IH_Vulkan::InitVulkan()
 	//grab the instance 
 	_instance = vkb_inst.instance;
 	_debug_messenger = vkb_inst.debug_messenger;
-
 
 	SDL_Vulkan_CreateSurface(_window->GetWindowObject(), _instance, nullptr, &_surface);
 
@@ -78,6 +90,9 @@ void IH_Vulkan::InitVulkan()
 
 void IH_Vulkan::InitSwapchain()
 {
+	const OpticsData& opticsData = IHE_PTR->GetAppData()->Optics;
+
+	CreateSwapchain(opticsData.WindowWidth, opticsData.WindowHeight);
 }
 
 void IH_Vulkan::InitCommands()
@@ -86,4 +101,34 @@ void IH_Vulkan::InitCommands()
 
 void IH_Vulkan::InitSyncStructures()
 {
+}
+
+void IH_Vulkan::CreateSwapchain(uint32_t Width, uint32_t Height)
+{
+	vkb::SwapchainBuilder swapchainBuilder{ _chosenGPU,_device,_surface };
+
+	_swapchainImageFormat = VK_FORMAT_B8G8R8A8_UNORM;
+
+	vkb::Swapchain vkbSwapchain = swapchainBuilder
+		.set_desired_format(VkSurfaceFormatKHR{ _swapchainImageFormat, VK_COLOR_SPACE_SRGB_NONLINEAR_KHR })
+		.set_desired_present_mode(VK_PRESENT_MODE_FIFO_KHR)
+		.set_desired_extent(Width, Height)
+		.add_image_usage_flags(VK_IMAGE_USAGE_TRANSFER_DST_BIT)
+		.build()
+		.value();
+
+	_swapchainExtent = vkbSwapchain.extent;
+	_swapchain = vkbSwapchain.swapchain;
+	_swapchainImages = vkbSwapchain.get_images().value();
+	_swapchainImageViews = vkbSwapchain.get_image_views().value();
+}
+
+void IH_Vulkan::DestroySwapchain()
+{
+	vkDestroySwapchainKHR(_device, _swapchain, nullptr);
+
+	for (int i = 0; i < _swapchainImageViews.size(); i++)
+	{
+		vkDestroyImageView(_device, _swapchainImageViews[i], nullptr);
+	}
 }

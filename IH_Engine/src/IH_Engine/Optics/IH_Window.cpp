@@ -33,6 +33,7 @@ void IH_Window::Update()
 
 void IH_Window::Destroy()
 {
+    _renderer->Clear();
     delete _renderer;
     SDL_DestroyWindow(_window);
 }

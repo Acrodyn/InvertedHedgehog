@@ -61,7 +61,6 @@ add_subdirectory(third_party/volk)
 target_link_libraries(IH_Vulkan PRIVATE volk)
 set_target_properties(volk PROPERTIES FOLDER "ExternalLibs")
 
-add_subdirectory(third_party/vma)
-target_link_libraries(IH_Vulkan PRIVATE GPUOpen::VulkanMemoryAllocator)
-target_include_directories(IH_Vulkan INTERFACE third_party/vma/include)
-set_target_properties(VulkanMemoryAllocator PROPERTIES FOLDER "ExternalLibs")
+target_include_directories(IH_Vulkan PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/third_party/vma/include
+)

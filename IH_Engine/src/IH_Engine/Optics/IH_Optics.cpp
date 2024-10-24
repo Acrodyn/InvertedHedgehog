@@ -3,7 +3,7 @@
 #include "IH_AppData.h"
 #include "IH_Engine.h"
 
-IH_Optics::IH_Optics() : _window(nullptr), _renderer(AppRenderer::Vulkan)
+IH_Optics::IH_Optics() : _window(nullptr)
 {
 }
 
@@ -15,10 +15,6 @@ void IH_Optics::Init(const AppData* AppData)
 	}
 
 	_window = new IH_Window();
-	_window->Init(AppData->AppName, 
-		AppData->Optics.WindowWidth,
-		AppData->Optics.WindowHeight,
-		AppData->Optics.Renderer);
 }
 
 void IH_Optics::Clear()
@@ -38,7 +34,17 @@ void IH_Optics::Render()
 	_window->Update();
 }
 
-void IH_Optics::SetRenderer(AppRenderer Renderer)
+void IH_API IH_Optics::InjectRenderer(IH_RendererInterface* Renderer)
 {
-	_renderer = Renderer;
+	IH_PTR_CHECK_VOID(_window);
+
+	// if already initialized, inject renderer without init
+	// _window->InjectRenderer(Renderer);
+
+	const AppData* appData = IHE_PTR->GetAppData();
+
+	_window->Init(appData->AppName,
+		appData->Optics.WindowWidth,
+		appData->Optics.WindowHeight,
+		Renderer);
 }

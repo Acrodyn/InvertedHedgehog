@@ -8,6 +8,6 @@ class IH_RendererInterface
 {
 public:
 	virtual void Init(IH_Window* Window) = 0;
-	virtual AppRenderer GetRendererType() = 0;
+	virtual int64_t GetWindowFlags() = 0;
 
 };

@@ -4,6 +4,8 @@
 #include "IH_Core.h"
 #include "IH_AppData.h"
 
+class IH_RendererInterface;
+
 class IH_Application
 {
 public:
@@ -12,7 +14,7 @@ public:
 
 public:
     void IH_API Run();
-    void IH_API SetAppRenderer(AppRenderer Renderer);
+    void IH_API SetAppRenderer(IH_RendererInterface* Renderer);
     void IH_API SetAppName(char* Name);
     void IH_API SetWindowDimensions(int Width, int Height);
 

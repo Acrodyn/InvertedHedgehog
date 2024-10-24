@@ -4,7 +4,7 @@
 #include "IH_AppData.h"
 
 class IH_Window;
-enum class AppRenderer;
+enum class RendererType;
 
 class IH_Optics : public IH_Module
 {
@@ -17,9 +17,9 @@ public:
 	bool CanUpdate();
 	void Render();
 
-	void IH_API SetRenderer(AppRenderer Renderer);
+	void IH_API SetRenderer(RendererType Renderer);
 	
 private:
 	IH_Window* _window;
-	AppRenderer _renderer;
+	RendererType _renderer;
 };

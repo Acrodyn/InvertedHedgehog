@@ -38,12 +38,13 @@ const AppData* IH_Engine::GetAppData()
 void IH_Engine::Init()
 {
 	IH_PTR_CHECK_VOID(_application);
-	_application->Init();
 
 	for (IH_Module* Module : _modules)
 	{
 		Module->Init(GetAppData());
 	}
+
+	_application->Init();
 }
 
 void IH_Engine::Start()

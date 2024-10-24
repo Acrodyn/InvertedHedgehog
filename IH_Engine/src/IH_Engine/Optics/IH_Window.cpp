@@ -1,23 +1,26 @@
 #include "IH_Window.h"
 #include "SDL3/SDL.h"
-
-// Todo: This should get abstracted properly with the renderer interface
-#include "IH_Vulkan/IH_Vulkan.h"
+#include "IH_Macros.h"
 
 IH_Window::IH_Window() : _event()
 {
+
 }
 
-void IH_Window::Init(char* Name, int Width, int Height, AppRenderer RendererType)
+void IH_Window::Init(char* Name, int Width, int Height, IH_RendererInterface* Renderer)
 {
     SDL_Init(SDL_INIT_VIDEO);
 
-    SDL_WindowFlags windowFlags = (SDL_WindowFlags)(GetAppropriateWindowFlags(RendererType));
+    SDL_WindowFlags windowFlags = (SDL_WindowFlags)(Renderer->GetWindowFlags());
     _window = SDL_CreateWindow(Name, Width, Height, windowFlags);
 
-    // TODO: Needs abstraction and flexibility
-    //_renderer = new IH_Vulkan();
-    //_renderer->Init(this);
+    InjectRenderer(Renderer);
+}
+
+void IH_Window::InjectRenderer(IH_RendererInterface* Renderer)
+{
+    _renderer = Renderer;
+    _renderer->Init(this);
 }
 
 void IH_Window::Update()
@@ -30,6 +33,7 @@ void IH_Window::Update()
 
 void IH_Window::Destroy()
 {
+    delete _renderer;
     SDL_DestroyWindow(_window);
 }
 
@@ -54,16 +58,4 @@ bool IH_Window::IsWindowMinimized()
 bool IH_Window::IsWindowMaximzed()
 {
     return _event.type == SDL_EVENT_WINDOW_MAXIMIZED;
-}
-
-Uint64 IH_Window::GetAppropriateWindowFlags(AppRenderer RendererType)
-{
-    switch(RendererType)
-    {
-    case AppRenderer::Vulkan:
-        return SDL_WINDOW_VULKAN;
-        break;
-    }
-
-    return 0;
 }

@@ -1,13 +1,7 @@
 #pragma once
 
-enum class AppRenderer
-{
-	Vulkan
-};
-
 struct OpticsData
 {
-	AppRenderer Renderer;
 	int WindowWidth;
 	int WindowHeight;
 };

@@ -14,7 +14,8 @@ class IH_Window
 public:
 	IH_Window();
 
-	void Init(char* Name, int Width, int Height, AppRenderer RendererType);
+	void Init(char* Name, int Width, int Height, IH_RendererInterface* Renderer);
+	void InjectRenderer(IH_RendererInterface* Renderer);
 	void Update();
 	void Destroy();
 
@@ -23,9 +24,6 @@ public:
 	bool IsWindowMaximzed();
 
 	SDL_Window* GetWindowObject() { return _window; };
-
-private:
-	Uint64 GetAppropriateWindowFlags(AppRenderer RendererType);
 
 private:
 	IH_RendererInterface* _renderer = nullptr;

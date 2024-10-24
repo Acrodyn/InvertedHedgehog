@@ -1,6 +1,7 @@
 #include "IH_Application.h"
 #include "IH_Engine.h"
-#include "Optics/IH_Graphics.h"
+#include "Optics/IH_Optics.h"
+#include "Optics/IH_RendererInterface.h"
 
 IH_Application::IH_Application() : _appData()
 {
@@ -15,9 +16,9 @@ void IH_Application::Run()
 	IHE_PTR->InjectApp(this);
 }
 
-void IH_Application::SetAppRenderer(AppRenderer Renderer)
+void IH_Application::SetAppRenderer(IH_RendererInterface* Renderer)
 {
-	_appData.Optics.Renderer = Renderer;
+	IHE::GetOptics()->InjectRenderer(Renderer);
 }
 
 void IH_Application::SetAppName(char* Name)

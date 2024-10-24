@@ -9,7 +9,7 @@ class IH_Vulkan : public IH_RendererInterface
 {
 public:
 	void Init(IH_Window* Window) override;
-	AppRenderer GetRendererType() override;
+	int64_t GetWindowFlags() override;
 
 private:
 	void InitVulkan();

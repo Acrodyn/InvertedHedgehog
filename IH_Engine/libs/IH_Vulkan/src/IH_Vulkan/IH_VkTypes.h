@@ -1,7 +1,5 @@
 ﻿#pragma once
 
-#define VMA_IMPLEMENTATION
-
 #include <memory>
 #include <optional>
 #include <string>
@@ -13,7 +11,7 @@
 
 #include <vulkan/vulkan.h>
 #include <vulkan/vk_enum_string_helper.h>
-#include <vk_mem_alloc.h>
+#include "vk_mem_alloc.h"
 
 #include <fmt/core.h>
 

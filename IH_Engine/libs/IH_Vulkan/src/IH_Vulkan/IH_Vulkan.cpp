@@ -18,9 +18,9 @@ void IH_Vulkan::Init(IH_Window* Window)
 	InitSyncStructures();
 }
 
-AppRenderer IH_Vulkan::GetRendererType()
+int64_t IH_Vulkan::GetWindowFlags()
 {
-	return AppRenderer::Vulkan;
+	return SDL_WINDOW_VULKAN;
 }
 
 void IH_Vulkan::InitVulkan()

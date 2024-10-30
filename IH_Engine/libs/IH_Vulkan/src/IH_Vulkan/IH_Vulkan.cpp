@@ -36,6 +36,11 @@ uint64_t IH_Vulkan::GetWindowFlags()
 	return SDL_WINDOW_VULKAN;
 }
 
+FrameData& IH_Vulkan::GetCurrentFrame()
+{
+	return _frames[_currentFrame];
+}
+
 void IH_Vulkan::InitVulkan()
 {
 	vkb::InstanceBuilder builder;
@@ -65,9 +70,6 @@ void IH_Vulkan::InitVulkan()
 	features12.bufferDeviceAddress = true;
 	features12.descriptorIndexing = true;
 
-
-	//use vkbootstrap to select a gpu. 
-	//We want a gpu that can write to the SDL surface and supports vulkan 1.3 with the correct features
 	vkb::PhysicalDeviceSelector selector{ vkb_inst };
 	vkb::PhysicalDevice physicalDevice = selector
 		.set_minimum_version(1, 3)
@@ -78,14 +80,14 @@ void IH_Vulkan::InitVulkan()
 		.value();
 
 
-	//create the final vulkan device
 	vkb::DeviceBuilder deviceBuilder{ physicalDevice };
-
 	vkb::Device vkbDevice = deviceBuilder.build().value();
 
-	// Get the VkDevice handle used in the rest of a vulkan application
 	_device = vkbDevice.device;
 	_chosenGPU = physicalDevice.physical_device;
+
+	_graphicsQueue = vkbDevice.get_queue(vkb::QueueType::graphics).value();
+	_graphicsQueueFamily = vkbDevice.get_queue_index(vkb::QueueType::graphics).value();
 }
 
 void IH_Vulkan::InitSwapchain()
@@ -97,6 +99,25 @@ void IH_Vulkan::InitSwapchain()
 
 void IH_Vulkan::InitCommands()
 {
+	VkCommandPoolCreateInfo commandPoolInfo = {};
+	commandPoolInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
+	commandPoolInfo.pNext = nullptr;
+	commandPoolInfo.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
+	commandPoolInfo.queueFamilyIndex = _graphicsQueueFamily;
+
+	for (int i = 0; i < FRAME_COUNT; ++i) 
+	{
+		VK_CHECK(vkCreateCommandPool(_device, &commandPoolInfo, nullptr, &_frames[i].CommandPool));
+
+		VkCommandBufferAllocateInfo cmdAllocInfo = {};
+		cmdAllocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+		cmdAllocInfo.pNext = nullptr;
+		cmdAllocInfo.commandPool = _frames[i].CommandPool;
+		cmdAllocInfo.commandBufferCount = 1;
+		cmdAllocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+
+		VK_CHECK(vkAllocateCommandBuffers(_device, &cmdAllocInfo, &_frames[i].MainCommandBuffer));
+	}
 }
 
 void IH_Vulkan::InitSyncStructures()

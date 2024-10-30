@@ -5,12 +5,23 @@
 
 class IH_Window;
 
+constexpr uint16_t FRAME_COUNT = 2;
+
+struct FrameData 
+{
+	VkCommandPool CommandPool;
+	VkCommandBuffer MainCommandBuffer;
+};
+
+constexpr unsigned int FRAME_OVERLAP = 2;
+
 class IH_Vulkan : public IH_RendererInterface
 {
 public:
 	void Init(IH_Window* Window) override;
 	void Clear() override;
 	uint64_t GetWindowFlags() override;
+	FrameData& GetCurrentFrame();
 
 private:
 	void InitVulkan();
@@ -20,6 +31,9 @@ private:
 
 	void CreateSwapchain(uint32_t Width, uint32_t Height);
 	void DestroySwapchain();
+
+public:
+	FrameData _frames[FRAME_COUNT];
 	
 private:
 	VkInstance _instance;						// Vulkan library handle
@@ -34,6 +48,10 @@ private:
 	std::vector<VkImageView> _swapchainImageViews;
 	VkExtent2D _swapchainExtent;
 
+	VkQueue _graphicsQueue;
 
 	IH_Window* _window;
+
+	uint16_t _currentFrame = 0;
+	uint32_t _graphicsQueueFamily = 0;
 };

@@ -25,12 +25,16 @@ public:
 
 private:
 	void InitVulkan();
-	void InitSwapchain();
-	void InitCommands();
-	void InitSyncStructures();
 
 	void CreateSwapchain(uint32_t Width, uint32_t Height);
+	void InitSwapchain();
 	void DestroySwapchain();
+
+	void InitCommands();
+	void DestroyCommands();
+
+	void InitSyncStructures();
+
 
 public:
 	FrameData _frames[FRAME_COUNT];

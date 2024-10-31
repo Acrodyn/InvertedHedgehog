@@ -22,6 +22,7 @@ void IH_Vulkan::Init(IH_Window* Window)
 
 void IH_Vulkan::Clear()
 {
+	DestroyCommands();
 	DestroySwapchain();
 
 	vkDestroySurfaceKHR(_instance, _surface, nullptr);
@@ -99,29 +100,31 @@ void IH_Vulkan::InitSwapchain()
 
 void IH_Vulkan::InitCommands()
 {
-	VkCommandPoolCreateInfo commandPoolInfo = {};
-	commandPoolInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
-	commandPoolInfo.pNext = nullptr;
-	commandPoolInfo.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
-	commandPoolInfo.queueFamilyIndex = _graphicsQueueFamily;
+	VkCommandPoolCreateInfo commandPoolInfo = VK_Init::CommandPoolCreateInfo(_graphicsQueueFamily, VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT);
 
 	for (int i = 0; i < FRAME_COUNT; ++i) 
 	{
 		VK_CHECK(vkCreateCommandPool(_device, &commandPoolInfo, nullptr, &_frames[i].CommandPool));
 
-		VkCommandBufferAllocateInfo cmdAllocInfo = {};
-		cmdAllocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
-		cmdAllocInfo.pNext = nullptr;
-		cmdAllocInfo.commandPool = _frames[i].CommandPool;
-		cmdAllocInfo.commandBufferCount = 1;
-		cmdAllocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+		VkCommandBufferAllocateInfo cmdAllocInfo = VK_Init::CommandBufferAllocateInfo(_frames[i].CommandPool, 1);
 
 		VK_CHECK(vkAllocateCommandBuffers(_device, &cmdAllocInfo, &_frames[i].MainCommandBuffer));
 	}
 }
 
+void IH_Vulkan::DestroyCommands()
+{
+	vkDeviceWaitIdle(_device);
+
+	for (int i = 0; i < FRAME_OVERLAP; ++i) 
+	{
+		vkDestroyCommandPool(_device, _frames[i].CommandPool, nullptr);
+	}
+}
+
 void IH_Vulkan::InitSyncStructures()
 {
+
 }
 
 void IH_Vulkan::CreateSwapchain(uint32_t Width, uint32_t Height)
